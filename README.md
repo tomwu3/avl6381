@@ -76,4 +76,5 @@ crw-------    1 root     root      212,   7 Nov 26 14:51 net0
 
 #### 参考资料
 - https://elixir.bootlin.com/linux/v5.15.150/source/drivers/media/usb/dvb-usb-v2/af9035.c
+- https://github.com/nns779/px4_drv/blob/develop/driver/it930x.c
 - https://github.com/tbsdtv/linux_media/blob/latest/drivers/media/dvb-frontends/mn88436.c
