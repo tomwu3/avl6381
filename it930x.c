@@ -1117,13 +1117,13 @@ static const struct dvb_usb_device_properties it930x_props = {
 	.num_adapters = 1,
 	.adapter = {
 		{
-//			.caps = DVB_USB_ADAP_HAS_PID_FILTER,
-			.caps = DVB_USB_ADAP_HAS_PID_FILTER |
-				DVB_USB_ADAP_PID_FILTER_CAN_BE_TURNED_OFF |
-				DVB_USB_ADAP_NEED_PID_FILTERING ,
+			.caps = DVB_USB_ADAP_HAS_PID_FILTER,
+//			.caps = DVB_USB_ADAP_HAS_PID_FILTER |
+//				DVB_USB_ADAP_PID_FILTER_CAN_BE_TURNED_OFF |
+//				DVB_USB_ADAP_NEED_PID_FILTERING ,
 			.pid_filter_count = 64,
-			.pid_filter_ctrl = it930x_pid_filter_ctrl,
-			.pid_filter = it930x_pid_filter,
+//			.pid_filter_ctrl = it930x_pid_filter_ctrl,
+//			.pid_filter = it930x_pid_filter,
 			
 			.stream = DVB_USB_STREAM_BULK(0x84, 4, 816 * 188),
 //		}, {
