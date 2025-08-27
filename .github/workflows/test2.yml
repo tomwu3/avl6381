@@ -49,11 +49,11 @@ jobs:
       - name: Stage compiled modules
         run: |
           mkdir -p build/ko_modules
-          cp avl6381/dvb-core.ko build/ko_modules/
-          cp avl6381/dvb_usb_v2.ko build/ko_modules/
-          cp avl6381/mxl603.ko build/ko_modules/
-          cp avl6381/avl6381.ko build/ko_modules/
-          cp avl6381/it930x.ko build/ko_modules/
+          cp /home/runner/work/avl6381/avl6381/dvb-core.ko build/ko_modules/
+          cp /home/runner/work/avl6381/avl6381/dvb_usb_v2.ko build/ko_modules/
+          cp /home/runner/work/avl6381/avl6381/mxl603.ko build/ko_modules/
+          cp /home/runner/work/avl6381/avl6381/avl6381.ko build/ko_modules/
+          cp /home/runner/work/avl6381/avl6381/it930x.ko build/ko_modules/
           ls -l build/ko_modules/
 
       # step 5: upload the directory as a workflow artifact
