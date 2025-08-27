@@ -26,8 +26,8 @@ jobs:
           
           # Download the specific kernel headers and image from Ubuntu archives
           # The URLs are for the 5.4.0-216.236 version on Launchpad
-          wget http://launchpadlibrarian.net/709875417/linux-headers-5.4.0-216-generic_5.4.0-216.236_amd64.deb
-          wget http://launchpadlibrarian.net/709875416/linux-image-unsigned-5.4.0-216-generic_5.4.0-216.236_amd64.deb
+          wget http://launchpadlibrarian.net/787680584/linux-headers-5.4.0-216-generic_5.4.0-216.236_amd64.deb
+          wget https://launchpad.net/~canonical-kernel-team/+archive/ubuntu/ppa/+build/30625263/+files/linux-image-unsigned-5.4.0-216-generic_5.4.0-216.236_amd64.deb
           
           # Install the downloaded .deb packages
           sudo dpkg -i linux-headers-5.4.0-216-generic_5.4.0-216.236_amd64.deb
@@ -41,6 +41,7 @@ jobs:
           # Set the kernel directory to the path of the downloaded headers
           export KERNEL_DIR="/usr/src/linux-headers-5.4.0-216-generic"
           
+
           
           # Check if the kernel directory exists before compiling
           ls -l $KERNEL_DIR
