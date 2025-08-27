@@ -33,40 +33,4 @@ jobs:
           wget http://launchpadlibrarian.net/787680584/linux-headers-5.4.0-216-generic_5.4.0-216.236_amd64.deb
           wget https://launchpad.net/~canonical-kernel-team/+archive/ubuntu/ppa/+build/30625263/+files/linux-headers-5.4.0-216_5.4.0-216.236_all.deb
           wget https://launchpad.net/~canonical-kernel-team/+archive/ubuntu/ppa/+build/30625263/+files/linux-image-unsigned-5.4.0-216-generic_5.4.0-216.236_amd64.deb
-          
-          # Install the downloaded .deb packages
-          sudo dpkg -i linux-headers-5.4.0-216_5.4.0-216.236_all.deb
-          sudo dpkg -i linux-headers-5.4.0-216-generic_5.4.0-216.236_amd64.deb
-          sudo dpkg -i linux-image-unsigned-5.4.0-216-generic_5.4.0-216.236_amd64.deb
-
-      # step 3: compile the driver
-      # The compilation steps are combined into one run block
-      - name: Compile Driver for Ubuntu Kernel
-        # set environment variables and run make commands
-        run: |
-          # Set the kernel directory to the path of the downloaded headers
-          export KERNEL_DIR="/usr/src/linux-headers-5.4.0-216-generic"
-          
-          # Run the compilation with the specified kernel path
-          ls -l $KERNEL_DIR
-          
-          make prepare
-          make KERNEL_DIR=$KERNEL_DIR
-
-      # step 4: create a directory for the compiled modules and copy the files
-      - name: Stage compiled modules
-        run: |
-          mkdir -p build/ko_modules
-          cp /home/runner/work/avl6381/avl6381/dvb-core.ko build/ko_modules/
-          cp /home/runner/work/avl6381/avl6381/dvb_usb_v2.ko build/ko_modules/
-          cp /home/runner/work/avl6381/avl6381/mxl603.ko build/ko_modules/
-          cp /home/runner/work/avl6381/avl6381/avl6381.ko build/ko_modules/
-          cp /home/runner/work/avl6381/avl6381/it930x.ko build/ko_modules/
-          ls -l build/ko_modules/
-
-      # step 5: upload the directory as a workflow artifact
-      - name: Upload Driver as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: avl6381-ubuntu-5.4.0-216-modules
-          path: build/ko_modules
+          w
