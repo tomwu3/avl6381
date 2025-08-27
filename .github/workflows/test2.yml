@@ -1,0 +1,64 @@
+# workflow name
+name: Build avl6381 Driver (x86-64) Test
+
+# trigger the workflow manually from the GitHub UI
+on:
+  workflow_dispatch:
+
+# Define a single job named 'build'
+jobs:
+  build:
+    # use a Linux runner
+    runs-on: ubuntu-latest
+    
+    # steps to be executed in the job
+    steps:
+      # step 1: check out the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # step 2: download and extract the ImmortalWrt SDK
+      - name: Download and Extract SDK
+        run: |
+          wget https://downloads.immortalwrt.org/releases/23.05.2/targets/x86/64/immortalwrt-sdk-23.05.2-x86-64_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+          tar xvf immortalwrt-sdk-23.05.2-x86-64_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+
+      # step 3: compile the driver
+      # all compilation steps are combined into one run block
+      - name: Compile Driver
+        # set environment variables and run make commands
+        run: |
+          # The SDK is extracted, so we can define its path
+          SDK_DIR=$(pwd)/immortalwrt-sdk-23.05.2-x86-64_gcc-12.3.0_musl.Linux-x86_64
+          
+          # Set the environment variables as per the instructions
+          export ARCH=x86
+          export STAGING_DIR="${SDK_DIR}/staging_dir/toolchain-x86_64_gcc-12.3.0_musl/bin/"
+          export KERNEL_DIR="${SDK_DIR}/build_dir/target-x86_64_musl/linux-x86_64/linux-5.15.150"
+          export TOOLCHAIN="${SDK_DIR}/staging_dir/toolchain-x86_64_gcc-12.3.0_musl/bin/x86_64-openwrt-linux-"
+          
+          # Check if the directories exist before compiling
+          ls -l $STAGING_DIR
+          ls -l $KERNEL_DIR
+          
+          # Run the compilation steps
+          make prepare
+          make
+
+      # step 4: create a directory for the compiled modules and copy the files
+      - name: Stage compiled modules
+        run: |
+          mkdir -p build/ko_modules
+          cp avl6381/dvb-core.ko build/ko_modules/
+          cp avl6381/dvb_usb_v2.ko build/ko_modules/
+          cp avl6381/mxl603.ko build/ko_modules/
+          cp avl6381/avl6381.ko build/ko_modules/
+          cp avl6381/it930x.ko build/ko_modules/
+          ls -l build/ko_modules/
+
+      # step 5: upload the directory as a workflow artifact
+      - name: Upload Driver as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: avl6381-driver-modules
+          path: build/ko_modules
