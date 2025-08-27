@@ -22,7 +22,11 @@ jobs:
         run: |
           # Install necessary packages for building from source
           sudo apt-get update
-          sudo apt-get install -y build-essential libssl3 
+          sudo apt-get install -y build-essential
+          
+          # Download and install libssl1.1 manually to resolve dependency issue
+          wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb
+          sudo dpkg -i ./libssl1.1_1.1.0g-2ubuntu4_amd64.deb
           
           # Download the specific kernel headers and image from Ubuntu archives
           # The URLs are for the 5.4.0-216.236 version on Launchpad
