@@ -22,14 +22,16 @@ jobs:
         run: |
           # Install necessary packages for building from source
           sudo apt-get update
-          sudo apt-get install -y build-essential
+          sudo apt-get install -y build-essential libssl1.1
           
           # Download the specific kernel headers and image from Ubuntu archives
           # The URLs are for the 5.4.0-216.236 version on Launchpad
           wget http://launchpadlibrarian.net/787680584/linux-headers-5.4.0-216-generic_5.4.0-216.236_amd64.deb
+          wget https://launchpad.net/~canonical-kernel-team/+archive/ubuntu/ppa/+build/30625263/+files/linux-headers-5.4.0-216_5.4.0-216.236_all.deb
           wget https://launchpad.net/~canonical-kernel-team/+archive/ubuntu/ppa/+build/30625263/+files/linux-image-unsigned-5.4.0-216-generic_5.4.0-216.236_amd64.deb
           
           # Install the downloaded .deb packages
+          sudo dpkg -i linux-headers-5.4.0-216_5.4.0-216.236_all.deb
           sudo dpkg -i linux-headers-5.4.0-216-generic_5.4.0-216.236_amd64.deb
           sudo dpkg -i linux-image-unsigned-5.4.0-216-generic_5.4.0-216.236_amd64.deb
 
@@ -41,12 +43,9 @@ jobs:
           # Set the kernel directory to the path of the downloaded headers
           export KERNEL_DIR="/usr/src/linux-headers-5.4.0-216-generic"
           
-
-          
-          # Check if the kernel directory exists before compiling
+          # Run the compilation with the specified kernel path
           ls -l $KERNEL_DIR
           
-          # Run the compilation with the specified kernel path
           make prepare
           make KERNEL_DIR=$KERNEL_DIR
 
