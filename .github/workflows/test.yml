@@ -51,4 +51,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: avl6381-driver
-          path: /home/runner/work/avl6381/
+          path: /home/runner/work/avl6381/avl6381/avl6381.ko
