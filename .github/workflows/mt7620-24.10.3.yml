@@ -32,7 +32,7 @@ jobs:
           SDK_DIR=$(pwd)/immortalwrt-sdk-24.10.3-ramips-mt7620_gcc-13.3.0_musl.Linux-x86_64
           
           # Set the environment variables as per the instructions
-          export ARCH=mipsel
+          export ARCH=mips
           export STAGING_DIR="${SDK_DIR}/staging_dir/toolchain-mipsel_24kc_gcc-13.3.0_musl/bin/"
           export KERNEL_DIR="${SDK_DIR}/build_dir/target-mipsel_24kc_musl/linux-ramips_mt7620/linux-6.6.104"
           export TOOLCHAIN="${SDK_DIR}/staging_dir/toolchain-mipsel_24kc_gcc-13.3.0_musl/bin/mipsel-openwrt-linux-"
