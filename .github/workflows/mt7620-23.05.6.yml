@@ -1,5 +1,5 @@
 # workflow name
-name: Build avl6381 Driver (immortalwrt-24.10.3-ramips-mt7620)
+name: Build avl6381 Driver (immortalwrt-23.05.6-ramips-mt7620)
 
 # trigger the workflow manually from the GitHub UI
 on:
@@ -20,8 +20,8 @@ jobs:
       # step 2: download and extract the ImmortalWrt SDK
       - name: Download and Extract SDK
         run: |
-          wget https://downloads.immortalwrt.org/releases/24.10.3/targets/ramips/mt7620/immortalwrt-sdk-24.10.3-ramips-mt7620_gcc-13.3.0_musl.Linux-x86_64.tar.zst
-          tar -I zstd -xvf immortalwrt-sdk-24.10.3-ramips-mt7620_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          wget https://downloads.immortalwrt.org/releases/23.05.6/targets/ramips/mt7620/immortalwrt-sdk-23.05.6-ramips-mt7620_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+          tar xvf immortalwrt-sdk-23.05.6-ramips-mt7620_gcc-12.3.0_musl.Linux-x86_64.tar.xz
 
       # step 3: compile the driver
       # all compilation steps are combined into one run block
@@ -29,17 +29,13 @@ jobs:
         # set environment variables and run make commands
         run: |
           # The SDK is extracted, so we can define its path
-          SDK_DIR=$(pwd)/immortalwrt-sdk-24.10.3-ramips-mt7620_gcc-13.3.0_musl.Linux-x86_64
+          SDK_DIR=$(pwd)/immortalwrt-sdk-23.05.6-ramips-mt7620_gcc-12.3.0_musl.Linux-x86_64
 
-          cp -r ~/linux/drivers/media/usb/dvb-usb/* ~/avl6381/linuxdvb/
-          cp -r ~/linux/drivers/media/usb/dvb-usb-v2/* ~/avl6381/linuxdvb/
-          cp -r ~/linux/drivers/media/dvb-core/* ~/avl6381/linuxdvb/
-          
           # Set the environment variables as per the instructions
           export ARCH=mips
-          export STAGING_DIR="${SDK_DIR}/staging_dir/toolchain-mipsel_24kc_gcc-13.3.0_musl/bin/"
-          export KERNEL_DIR="${SDK_DIR}/build_dir/target-mipsel_24kc_musl/linux-ramips_mt7620/linux-6.6.104"
-          export TOOLCHAIN="${SDK_DIR}/staging_dir/toolchain-mipsel_24kc_gcc-13.3.0_musl/bin/mipsel-openwrt-linux-musl-"
+          export STAGING_DIR="${SDK_DIR}/staging_dir/toolchain-mipsel_24kc_gcc-12.3.0_musl/bin/"
+          export KERNEL_DIR="${SDK_DIR}/build_dir/target-mipsel_24kc_musl/linux-ramips_mt7620/linux-5.15.189"
+          export TOOLCHAIN="${SDK_DIR}/staging_dir/toolchain-mipsel_24kc_gcc-12.3.0_musl/bin/mipsel-openwrt-linux-musl-"
           
           # Check if the directories exist before compiling
           ls -l $STAGING_DIR
