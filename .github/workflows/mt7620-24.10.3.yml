@@ -35,7 +35,7 @@ jobs:
           export ARCH=mips
           export STAGING_DIR="${SDK_DIR}/staging_dir/toolchain-mipsel_24kc_gcc-13.3.0_musl/bin/"
           export KERNEL_DIR="${SDK_DIR}/build_dir/target-mipsel_24kc_musl/linux-ramips_mt7620/linux-6.6.104"
-          export TOOLCHAIN="${SDK_DIR}/staging_dir/toolchain-mipsel_24kc_gcc-13.3.0_musl/bin/mipsel-openwrt-linux-"
+          export TOOLCHAIN="${SDK_DIR}/staging_dir/toolchain-mipsel_24kc_gcc-13.3.0_musl/bin/mipsel-openwrt-linux-musl-"
           
           # Check if the directories exist before compiling
           ls -l $STAGING_DIR
