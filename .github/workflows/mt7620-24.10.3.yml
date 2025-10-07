@@ -30,6 +30,10 @@ jobs:
         run: |
           # The SDK is extracted, so we can define its path
           SDK_DIR=$(pwd)/immortalwrt-sdk-24.10.3-ramips-mt7620_gcc-13.3.0_musl.Linux-x86_64
+
+          cp -r ~/linux/drivers/media/usb/dvb-usb/* ~/avl6381/linuxdvb/
+          cp -r ~/linux/drivers/media/usb/dvb-usb-v2/* ~/avl6381/linuxdvb/
+          cp -r ~/linux/drivers/media/dvb-core/* ~/avl6381/linuxdvb/
           
           # Set the environment variables as per the instructions
           export ARCH=mips
