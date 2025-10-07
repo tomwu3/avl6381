@@ -54,6 +54,7 @@ jobs:
           cp /home/runner/work/avl6381/avl6381/mxl603.ko build/ko_modules/
           cp /home/runner/work/avl6381/avl6381/avl6381.ko build/ko_modules/
           cp /home/runner/work/avl6381/avl6381/it930x.ko build/ko_modules/
+          cp dvb-usb-it9303-01.fw build/ko_modules/
           ls -l build/ko_modules/
 
       # step 5: upload the directory as a workflow artifact
