@@ -14,7 +14,7 @@ dvb-core-objs += linuxdvb/dvb_ca_en50221.o linuxdvb/dvb_frontend.o linuxdvb/dvb_
 dvb-core-objs += linuxdvb/dvb_ringbuffer.o linuxdvb/dvb_math.o
 
 #linux kernel version <= 4.10.0
-#dvb-core-objs += linuxdvb/dvb_filter.o
+dvb-core-objs += linuxdvb/dvb_filter.o
 
 obj-m += dvb-core.o
 
